@@ -1,0 +1,53 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ebayService WSDL service -->
+
+  <service name="ebay" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ebay.com"/>
+      <parameter name="wsdlServiceElement" value="ebayService"/>
+      <parameter name="schemaQualified" value="http://ebay.com"/>
+      <parameter name="wsdlServicePort" value="ebay"/>
+      <parameter name="className" value="com.ebay.EbaySoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ebay"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="removeYourBidAD" qname="operNS:removeYourBidAD" xmlns:operNS="http://ebay.com" returnQName="retNS:removeYourBidADReturn" xmlns:retNS="http://ebay.com" returnType="rtns:anyType" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:product_id" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:username" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="submitAd" qname="operNS:submitAd" xmlns:operNS="http://ebay.com" returnQName="retNS:submitAdReturn" xmlns:retNS="http://ebay.com" returnType="rtns:anyType" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:product_name" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:product_desc" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:product_price" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:tot_product" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:username" xmlns:pns="http://ebay.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="removeYourBidAD submitAd"/>
+
+      <typeMapping
+        xmlns:ns="http://ebay.com"
+        qname="ns:>submitAdResponse"
+        type="java:com.ebay.SubmitAdResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ebay.com"
+        qname="ns:>submitAd"
+        type="java:com.ebay.SubmitAd"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ebay.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ebay.com" xmlns:intf="http://ebay.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ebay.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="removeYourBidAD">
+    <complexType>
+     <sequence>
+      <element name="product_id" type="xsd:string"/>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeYourBidADResponse">
+    <complexType>
+     <sequence>
+      <element name="removeYourBidADReturn" type="xsd:anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="removeYourBidADResponse">
+
+      <wsdl:part element="impl:removeYourBidADResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeYourBidADRequest">
+
+      <wsdl:part element="impl:removeYourBidAD" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="managebiditems">
+
+      <wsdl:operation name="removeYourBidAD">
+
+         <wsdl:input message="impl:removeYourBidADRequest" name="removeYourBidADRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeYourBidADResponse" name="removeYourBidADResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="managebiditemsSoapBinding" type="impl:managebiditems">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="removeYourBidAD">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeYourBidADRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeYourBidADResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="managebiditemsService">
+
+      <wsdl:port binding="impl:managebiditemsSoapBinding" name="managebiditems">
+
+         <wsdlsoap:address location="http://localhost:8080/EbayServices/services/managebiditems"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
